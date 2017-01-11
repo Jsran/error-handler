@@ -38,7 +38,7 @@ class ErrorHandler
     public $debugLog = false;
 
     /**
-     * Метод перехвата ошибок
+     * Method error trapping
      * @param int $errno
      * @param string $errstr
      * @param string $errfile
@@ -51,7 +51,7 @@ class ErrorHandler
     }
 
     /**
-     * Метод перехвата исключений
+     * Exceptions intercept method
      * @param \Throwable $ex
      */
     public function exceptionHandler(\Throwable $ex)
@@ -60,7 +60,7 @@ class ErrorHandler
     }
 
     /**
-     * Обработка исключений
+     * Exception Handling
      * @param \Throwable $ex
      */
     protected function handler(\Throwable $ex)
@@ -83,7 +83,7 @@ class ErrorHandler
     }
 
     /**
-     * Определение по типу
+     * Determination of type
      * @param int $errno
      * @return bool
      */
@@ -114,7 +114,7 @@ class ErrorHandler
     }
 
     /**
-     * Определение типа сообщения в логе по типу ошибки
+     * Determining the type of message in the log for the error type
      * @param int $errno
      * @return bool
      */
@@ -148,7 +148,7 @@ class ErrorHandler
     }
 
     /**
-     * Выбрасывает 500й статус и текст с ошибкой
+     * Throws 500y status and the text of the error
      * @param string $errstr
      */
     protected function page500(string $errstr)
@@ -169,7 +169,7 @@ class ErrorHandler
     }
 
     /**
-     * Парсинг шаблона
+     * Parsing template
      * @param \Throwable $ex
      * @param string $code
      * @return mixed
@@ -190,7 +190,7 @@ class ErrorHandler
     }
 
     /**
-     * Добавление глобальных переменных в строку
+     * Adding global variables in a row
      * @param $fullMessage
      * @return string
      */
@@ -232,7 +232,7 @@ class ErrorHandler
     }
 
     /**
-     * Сообщение об ошибке в html
+     * Error message in html
      * @param string $errstr
      * @return string
      */
@@ -249,7 +249,7 @@ class ErrorHandler
     }
 
     /**
-     * Сообщение об ошибке в json
+     * Error message in json
      * @param string $errstr
      * @return string
      */
@@ -259,7 +259,7 @@ class ErrorHandler
     }
 
     /**
-     * Запись в логи об ошибке
+     * Record error logs
      * @param \Throwable $ex
      */
     protected function log(\Throwable $ex)
@@ -275,7 +275,7 @@ class ErrorHandler
     }
 
     /**
-     * Информация об ошибке
+     * Error Information
      * @param \Throwable $ex
      */
     protected function debugError(\Throwable $ex)
