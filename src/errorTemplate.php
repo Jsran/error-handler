@@ -6,26 +6,29 @@
 
 <style>
 
-.header {
-    margin-top: 1px;
-    background-color: #9B410E;
-    padding: 8px;
-}
-.header h5 {
-    margin: 0;
-}
+    .header {
+        margin-top: 1px;
+        background-color: #9B410E;
+        padding: 8px;
+    }
 
-.body {
-    border: 2px solid #9B410E;
-    padding: 5px;
-}
-.trace {
-    text-align: right;
-}
-.file {
-    font-size: 18px;
-    font-weight: bold;
-}
+    .header h5 {
+        margin: 0;
+    }
+
+    .body {
+        border: 2px solid #9B410E;
+        padding: 5px;
+    }
+
+    .trace {
+        text-align: right;
+    }
+
+    .file {
+        font-size: 18px;
+        font-weight: bold;
+    }
 </style>
 
 <header class="header">
@@ -45,10 +48,10 @@
 </header>
 <div class="body">
     <table class="trace">
-        <?php foreach ($exception->getTrace() as $trace): ?>
+        <?php foreach ($exception->getTrace() as $trace) : ?>
             <tr>
                 <td>
-                    <?php if (isset($trace['class']) && isset($trace['type']) && isset($trace['function'])): ?>
+                    <?php if (isset($trace['class']) && isset($trace['type']) && isset($trace['function'])) : ?>
                         <span class="class"><?= 'at ' . $trace['class'] . $trace['type'] . $trace['function'] ?></span>
                     <?php endif ?>
                     <span class="file"><?= 'in ' . $trace['file'] . ':' . $trace['line'] ?></span>
@@ -84,11 +87,11 @@
         <p><?= highlight_string(print_r($_POST, true), true) ?></p>
     </div>
 
-    <?php if (\PHP_SESSION_ACTIVE == session_status()): ?>
-    <div>
-        <p>$_SESSION</p>
-        <p><?= highlight_string(print_r($_SESSION, true), true) ?></p>
-    </div>
+    <?php if (\PHP_SESSION_ACTIVE == session_status()) : ?>
+        <div>
+            <p>$_SESSION</p>
+            <p><?= highlight_string(print_r($_SESSION, true), true) ?></p>
+        </div>
     <?php endif ?>
     <div>
         <p>$_COOKIE</p>
@@ -100,13 +103,10 @@
         <p><?= highlight_string(print_r($_SERVER, true), true) ?></p>
     </div>
 
-    <?php if (function_exists('pinba_get_info')): ?>
-    <div>
-        <p>Pinba</p>
-        <p><?= highlight_string(print_r(pinba_get_info(), true), true) ?></p>
-    </div>
+    <?php if (function_exists('pinba_get_info')) : ?>
+        <div>
+            <p>Pinba</p>
+            <p><?= highlight_string(print_r(pinba_get_info(), true), true) ?></p>
+        </div>
     <?php endif ?>
 </div>
-
-
-

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace suffi\ErrorHandler;
-
 
 use Psr\Log\AbstractLogger;
 use Psr\Log\LogLevel;
@@ -45,8 +43,13 @@ class ErrorHandler
      * @param int $errline
      * @param array $errcontext
      */
-    public function errorHandler(int $errno, string $errstr, string $errfile = '', int $errline = 0, array $errcontext = [])
-    {
+    public function errorHandler(
+        int $errno,
+        string $errstr,
+        string $errfile = '',
+        int $errline = 0,
+        array $errcontext = []
+    ) {
         $this->handler(new \ErrorException($errstr, 0, $errno, $errfile, $errline));
     }
 
@@ -87,7 +90,7 @@ class ErrorHandler
      * @param int $errno
      * @return bool
      */
-    protected function isError(int $errno):bool
+    protected function isError(int $errno): bool
     {
         switch ($errno) {
             case E_ERROR:
@@ -118,7 +121,7 @@ class ErrorHandler
      * @param int $errno
      * @return bool
      */
-    protected function getLogLevel(int $errno):bool
+    protected function getLogLevel(int $errno): bool
     {
         switch ($errno) {
             case E_ERROR:
@@ -153,19 +156,17 @@ class ErrorHandler
      */
     protected function page500(string $errstr)
     {
-
         if (!$this->debug) {
             ob_clean();
         }
         if (!headers_sent()) {
             header('HTTP/1.1 500');
         }
-        if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+        if (strtolower($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') == 'xmlhttprequest') {
             echo $this->jsonError($errstr);
         } else {
             echo $this->htmlError($errstr);
         }
-
     }
 
     /**
@@ -186,7 +187,6 @@ class ErrorHandler
         require('errorTemplate.php');
 
         return ob_get_clean();
-
     }
 
     /**
@@ -245,7 +245,7 @@ class ErrorHandler
                         <p>%s</p>
                         </div>
                         </body>
-                    </html>', $errstr) ;
+                    </html>', $errstr);
     }
 
     /**
@@ -271,7 +271,6 @@ class ErrorHandler
             $fullMessage = $this->addGlobals($fullMessage);
             $this->logger->log(LogLevel::DEBUG, $fullMessage);
         }
-
     }
 
     /**
@@ -293,7 +292,6 @@ class ErrorHandler
                 }
             }
         } catch (\Throwable $e) {
-
         }
 
         echo $this->parseDebug($ex, $code);
@@ -314,5 +312,4 @@ class ErrorHandler
         }
         return $fullMessage;
     }
-
 }
